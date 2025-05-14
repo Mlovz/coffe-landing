@@ -144,7 +144,7 @@ export default function Hero() {
             <source src="/videos/coffee-hero2.mp4" type="video/mp4" />
           </video>
 
-          <div className="absolute w-full md:h-[1000px] bg-black/20 flex items-center justify-center">
+          <div className="absolute w-full md:h-[1000px] bg-black/10 flex items-center justify-center">
             <h1
               ref={textRef}
               className="text-5xl md:text-7xl lg:text-8xl font-bold text-white text-center px-4"
@@ -177,10 +177,10 @@ export default function Hero() {
               transition={{ delay: 6.5, duration: 0.8 }}
               className="text-center max-w-md flex flex-col items-center gap-2"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 uppercase">
+              <h2 className="text-3xl md:text-4xl font-bold text-white uppercase">
                 Искусство кофе
               </h2>
-              <p className="text-white/90 mb-6">
+              <p className="text-white/90 ">
                 Откройте для себя мир премиального кофе и мастерства бариста
               </p>
               <button className="w-[170px] h-[40px] bg-amber-600 text-white rounded-full hover:bg-amber-700 transition-colors duration-300">

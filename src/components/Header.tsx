@@ -107,10 +107,13 @@ export default function Header() {
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 5.8 }}
-        className={`flex justify-center items-center bg-[#f8f8f8] fixed top-0 w-full z-40 backdrop-blur-md transition-all duration-300 ${
-          isScrolled ? "h-16" : "h-11"
-        } ${isScrolled ? "text-white" : "text-black"}`}
+        transition={{ delay: 6.2 }}
+        className={`flex justify-center  items-center bg-[#f8f8f8] fixed top-0 w-full z-40 backdrop-blur-md  ${
+          isScrolled ? "h-16 " : "h-11 "
+        } `}
+        style={{
+          transition: "height 300ms ease, color 300ms ease",
+        }}
       >
         <nav className="max-w-6xl w-full mx-auto px-6 py-4">
           <ul className={`flex gap-14 justify-center items-center`}>

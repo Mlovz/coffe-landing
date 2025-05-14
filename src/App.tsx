@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import CourseStructure from "./components/CourseStructure";
 import CourseStructureCopy from "./components/CourseStructureCopy";
+import CoffeeHistory from "./components/CoffeeHistory";
+import CoffeeProcess from "./components/CoffeeProcess";
 // import Hero from './components/Hero';
 
 export default function App() {
@@ -22,6 +24,8 @@ export default function App() {
       {isLoading && <Preloader />}
       <Header />
       <Hero />
+      <CoffeeHistory />
+      <CoffeeProcess />
       <CourseStructureCopy />
 
       {/* Другие секции будут здесь */}
