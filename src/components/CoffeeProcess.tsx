@@ -66,12 +66,12 @@ export default function CoffeeProcess() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="text-5xl font-light z-10 py-8 text-stone-800 text-center"
+        className="text-[40px] font-light z-10 pb-10 pt-20 text-stone-800 text-center"
       >
         От зерна до чашки
       </motion.h2>
 
-      <div ref={containerRef} className="relative bg-stone-50 flex pb-20">
+      <div ref={containerRef} className="relative bg-stone-50 flex ">
         {/* Фиксированный прогресс-бар */}
         <div className="w-1/4 sticky top-0 h-screen flex items-center justify-center">
           <div className="relative h-3/4 w-px bg-stone-200">
@@ -118,7 +118,7 @@ export default function CoffeeProcess() {
                 className="w-full h-full relative rounded-2xl overflow-hidden shadow-xl"
                 initial={false}
                 animate={{
-                  opacity: activeStep === index ? 1 : 0.5,
+                  opacity: activeStep === index ? 1 : 0.3,
                   scale: activeStep === index ? 1 : 0.95,
                   filter: activeStep === index ? "none" : "brightness(0.7)",
                 }}

@@ -6,6 +6,9 @@ import CourseStructure from "./components/CourseStructure";
 import CourseStructureCopy from "./components/CourseStructureCopy";
 import CoffeeHistory from "./components/CoffeeHistory";
 import CoffeeProcess from "./components/CoffeeProcess";
+import DrinkGallery from "./components/DrinkGallery";
+import BaristaTools from "./components/BaristaTools";
+import BaristaToolsCopy from "./components/BaristaToolsСopy";
 // import Hero from './components/Hero';
 
 export default function App() {
@@ -19,6 +22,14 @@ export default function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isLoading]);
+
   return (
     <div className="">
       {isLoading && <Preloader />}
@@ -26,6 +37,9 @@ export default function App() {
       <Hero />
       <CoffeeHistory />
       <CoffeeProcess />
+      <DrinkGallery />
+      <BaristaTools />
+      <BaristaToolsCopy />
       <CourseStructureCopy />
 
       {/* Другие секции будут здесь */}

@@ -179,7 +179,7 @@ export default function CoffeeHistory() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="text-5xl font-light z-10 py-8 text-stone-800 text-center"
+        className="text-[40px] font-light z-10 pb-10 pt-20 text-stone-800 text-center"
       >
         Эволюция кофейной культуры
       </motion.h2>

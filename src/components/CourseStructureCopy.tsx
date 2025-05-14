@@ -9,9 +9,9 @@ export default function CourseStructureCopy() {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="w-full h-40 flex flex-col gap-2 justify-center mx-auto text-center "
+        className="w-full pb-10 pt-20 flex flex-col gap-2 justify-center mx-auto text-center "
       >
-        <h2 className="text-5xl font-medium">Как устроен курс</h2>
+        <h2 className="text-[40px] font-medium">Как устроен курс</h2>
         <p className="text-xl text-gray-600">
           Инновационный формат, сочетающий кинематографичный видеоконтент и
           персональную поддержку
