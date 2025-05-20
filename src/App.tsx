@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import Preloader from "./components/Preloader";
-import Header from "./components/Header";
 import Hero from "./components/Hero";
 import CourseStructure from "./components/CourseStructure";
 import CourseStructureCopy from "./components/CourseStructureCopy";
@@ -9,6 +8,7 @@ import CoffeeProcess from "./components/CoffeeProcess";
 import DrinkGallery from "./components/DrinkGallery";
 import BaristaTools from "./components/BaristaTools";
 import BaristaToolsCopy from "./components/BaristaToolsСopy";
+import { Header } from "./components/Header";
 // import Hero from './components/Hero';
 
 export default function App() {

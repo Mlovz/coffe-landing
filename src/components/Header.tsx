@@ -1,197 +1,75 @@
-import { useState, useEffect, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
-import Logo from "../assets/logo2.png";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { useRef, useState } from "react";
+import gsap from "gsap";
 
-export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const searchRef = useRef(null);
+export const Header = () => {
+  const [activeSection, setActiveSection] = useState("home");
+  const headerRef = useRef(null);
+  const { scrollY } = useScroll();
 
-  // Блокировка скролла при открытом поиске
-  useEffect(() => {
-    if (isSearchOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [isSearchOpen]);
-
-  // Закрытие поиска при клике вне области
-  useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (searchRef.current && !searchRef.current.contains(e.target)) {
-        setIsSearchOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const menuItems = [
-    {
-      name: "Программа",
-      link: "#program",
-      submenu: [
-        { name: "Чему научитесь", link: "#skills" },
-        { name: "Преподаватели", link: "#teachers" },
-        { name: "Расписание", link: "#schedule" },
-        { name: "Сертификат", link: "#certificate" }, // Новое!
-      ],
-    },
-    {
-      name: "Карьера", // Новый раздел
-      link: "#career",
-      submenu: [
-        { name: "Трудоустройство", link: "#jobs" },
-        { name: "Стажировка", link: "#internship" },
-        { name: "Истории выпускников", link: "#success" },
-      ],
-    },
-    {
-      name: "Блог", // Новый раздел
-      link: "/blog",
-      submenu: [
-        { name: "Гайды", link: "/blog/guides" },
-        { name: "Интервью", link: "/blog/interviews" },
-      ],
-    },
-    {
-      name: "Стоимость",
-      link: "#price",
-      submenu: [
-        { name: "Тарифы", link: "#plans" },
-        { name: "Рассрочка", link: "#installment" },
-      ],
-    },
-    {
-      name: "Контакты",
-      link: "#contacts",
-      submenu: [
-        { name: "Чат поддержки", link: "#support" },
-        { name: "Для партнёров", link: "#partners" },
-      ],
-    },
-  ];
+  // Анимация прозрачности при скролле
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    console.log(latest);
+    if (latest > 100)
+      gsap.to(headerRef.current, {
+        backdropFilter: "blur(10px)",
+        duration: 0.3,
+      });
+    else
+      gsap.to(headerRef.current, {
+        backdropFilter: "blur(0px)",
+        duration: 0.3,
+      });
+  });
 
   return (
-    <>
-      <AnimatePresence>
-        {isSearchOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.7 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black z-20"
-          />
-        )}
-      </AnimatePresence>
-      <motion.header
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 6.2 }}
-        className={`flex justify-center  items-center bg-[#f8f8f8] fixed top-0 w-full z-40 backdrop-blur-md  ${
-          isScrolled ? "h-16 " : "h-11 "
-        } `}
-        style={{
-          transition: "height 300ms ease, color 300ms ease",
-        }}
-      >
-        <nav className="max-w-6xl w-full mx-auto px-6 py-4">
-          <ul className={`flex gap-14 justify-center items-center`}>
-            <li className="text-2xl font-semibold text-black">
-              <img className="w-6 h-6" src={Logo} alt="" />
-            </li>
+    <motion.header
+      ref={headerRef}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", damping: 25 }}
+      className="fixed top-0 z-50 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800"
+    >
+      <div className="container mx-auto px-6 py-3 flex justify-between items-center">
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          className="text-2xl font-bold bg-gradient-to-r from-amber-600 to-amber-400 bg-clip-text text-transparent"
+        >
+          BaristaMaster
+        </motion.div>
 
-            <div className="hidden md:flex gap-8">
-              {menuItems.map((item, index) => (
-                <li key={index}>
-                  <a
-                    href={item.link}
-                    className={`text-black text-[12px] hover:opacity-70 transition-opacity`}
-                  >
-                    {item.name}
-                  </a>
-                </li>
-              ))}
-
-              <li className="flex items-center cursor-pointer">
-                {isSearchOpen ? (
-                  <AiOutlineClose
-                    color="#000"
-                    onClick={() => setIsSearchOpen(false)}
-                  />
-                ) : (
-                  <AiOutlineSearch
-                    color="#000"
-                    onClick={() => setIsSearchOpen(true)}
-                  />
-                )}
-              </li>
-            </div>
-          </ul>
+        <nav className="hidden md:flex space-x-8">
+          {["home", "course", "benefits", "program", "reviews"].map((item) => (
+            <motion.a
+              key={item}
+              href={`#${item}`}
+              onHoverStart={() =>
+                gsap.to(`.indicator-${item}`, { scaleX: 1, duration: 0.3 })
+              }
+              onHoverEnd={() =>
+                !activeSection.includes(item) &&
+                gsap.to(`.indicator-${item}`, { scaleX: 0, duration: 0.3 })
+              }
+              className="relative px-1 py-2 text-gray-700 dark:text-gray-300 uppercase text-sm font-medium"
+            >
+              {item}
+              <motion.span
+                className={`absolute bottom-0 left-0 w-full h-0.5 bg-amber-400 origin-left indicator-${item}`}
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: activeSection === item ? 1 : 0 }}
+              />
+            </motion.a>
+          ))}
         </nav>
-      </motion.header>
 
-      {/* Поисковая панель */}
-      <AnimatePresence>
-        {isSearchOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20, height: 0 }}
-            animate={{ opacity: 1, y: 0, height: "400px" }}
-            exit={{ opacity: 0, y: -20, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed top-0 left-0 w-full bg-white z-30 shadow-md flex justify-center"
-            style={{
-              paddingTop: "84px",
-            }}
-            ref={searchRef}
-          >
-            <div className="max-w-6xl w-full mx-auto  px-6 py-4">
-              <div className="relative flex items-center gap-4">
-                <div className="">
-                  <AiOutlineSearch className="text-gray-400 text-xl" />
-                </div>
-                <input
-                  type="text"
-                  placeholder="Поиск по сайту..."
-                  className="w-full py-4 px-4 text-lg   outline-none"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  autoFocus
-                />
-              </div>
-
-              {/* Пример результатов поиска (можно динамически заполнять) */}
-              {searchQuery && (
-                <div className="mt-4 py-2">
-                  <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer">
-                    Результат по запросу "{searchQuery}"
-                  </div>
-                </div>
-              )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="px-6 py-2 bg-amber-500 text-white rounded-full font-medium shadow-lg shadow-amber-500/20"
+        >
+          Записаться
+        </motion.button>
+      </div>
+    </motion.header>
   );
-}
+};
