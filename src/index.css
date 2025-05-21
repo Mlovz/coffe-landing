@@ -60,6 +60,10 @@ body{
 }
 
 
+.aaa{
+  will-change: auto;
+}
+
 .video-parent {
   will-change: transform; /* Улучшаем производительность */
   overflow: hidden; /* Скрываем "вылезающие" части */
@@ -73,5 +77,16 @@ body{
 }
 
 
+
+
+.perspective-text {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  
+}
+
+.course-step:hover .course-content {
+  transform: translateZ(20px);
+}
 
 

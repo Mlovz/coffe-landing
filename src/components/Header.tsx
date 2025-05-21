@@ -9,7 +9,6 @@ export const Header = () => {
 
   // Анимация прозрачности при скролле
   useMotionValueEvent(scrollY, "change", (latest) => {
-    console.log(latest);
     if (latest > 100)
       gsap.to(headerRef.current, {
         backdropFilter: "blur(10px)",
@@ -28,7 +27,7 @@ export const Header = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", damping: 25 }}
-      className="fixed top-0 z-50 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800"
+      className="fixed top-0 z-50 w-full bg-[#1a2e1acc] dark:bg-[#1a2e1acc] backdrop-blur-sm border-b border-gray-200 dark:border-gray-800"
     >
       <div className="container mx-auto px-6 py-3 flex justify-between items-center">
         <motion.div
